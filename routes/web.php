@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Models\Product;
 
@@ -20,7 +21,15 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard', [
+        'products' => Product::all()
+            ->where('user_id', '==', 1)
+            ->sortBy('name')
+            ->take(2),
+        'categories' => Category::all()
+            ->sortBy('name')
+            ->take(2)
+        ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/products', function () {
@@ -28,9 +37,25 @@ Route::get('/products', function () {
         'products' => Product::all()
             ->where('user_id', '==', 1)
             ->sortBy('name')
-            ->take(2)
+            ->take(5)
         ]);
 })->middleware(['auth', 'verified'])->name('products');
+
+Route::get('/categories', function () {
+    return view('categories', [
+        'categories' => Category::all()
+            ->sortBy('name')
+            ->take(2)
+        ]);
+})->middleware(['auth', 'verified'])->name('categories');
+
+Route::get('/product_create)', function () {
+    return view('product_create');
+})->middleware(['auth', 'verified'])->name('product_create');
+
+Route::get('/category_create)', function () {
+    return view('category_create');
+})->middleware(['auth', 'verified'])->name('category_create');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

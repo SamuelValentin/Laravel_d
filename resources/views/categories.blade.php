@@ -7,28 +7,22 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg grid grid-cols-2 md:grid-cols-4">
-                    <div class="p-6 text-gray-900 dark:text-gray-100 border-b-2 border-neutral-200">
-                        Nome
-                    </div>
-                    <div class="p-6 text-gray-900 dark:text-gray-100 border-b-2 border-neutral-200">
-                        Preço
-                    </div>
-                    <div class="p-6 text-gray-900 dark:text-gray-100 border-b-2 border-neutral-200">
-                        Categorias
-                    </div>
-                    <div class="p-6 text-gray-900 dark:text-gray-100 border-b-2 border-neutral-200">
-                        Editar
-                    </div>
-                @foreach ($products as $product)
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg grid grid-cols-3">
+                <div class="p-6 text-gray-900 dark:text-gray-100 border-b-2 border-neutral-200">
+                    Id
+                </div>
+                <div class="p-6 text-gray-900 dark:text-gray-100 border-b-2 border-neutral-200">
+                    Nome
+                </div>
+                <div class="p-6 text-gray-900 dark:text-gray-100 border-b-2 border-neutral-200">
+                    Editar
+                </div>
+                @foreach ($categories as $category)
                     <div class="p-6 text-gray-900 dark:text-gray-100">
-                        {{ $product->name }}
+                        {{ $category->id }}
                     </div>
                     <div class="p-6 text-gray-900 dark:text-gray-100">
-                        {{ $product->price }}
-                    </div>
-                    <div class="p-6 text-gray-900 dark:text-gray-100">
-                        {{ $product->categories_id }}
+                        {{ $category->name }}
                     </div>
                     <div class="m-5" href={{ route('products') }}>
                         <button class="flex p-2.5 bg-blue-500 rounded-xl hover:rounded-3xl hover:bg-blue-700 transition-all duration-300 text-white dark:bg-blue-900 dark:hover:bg-blue-700 dar">
@@ -49,11 +43,13 @@
                     </button>
                 </div>
                 <div class="p-3 justify-items-end">
-                    <a href={{ route('product_create') }}>
-                        <button class="bg-transparent hover:bg-blue-500 text-blue-700 dark:text-white font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                            Adicionar 
-                        </button>
-                    </a>
+                    <div class="p-3 justify-items-end">
+                        <a href={{ route('category_create') }}>
+                            <button class="bg-transparent hover:bg-blue-500 text-blue-700 dark:text-white font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                                Adicionar 
+                            </button>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
