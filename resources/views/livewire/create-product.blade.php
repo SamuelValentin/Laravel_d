@@ -31,7 +31,7 @@
                 <x-input-label for="name" :value="__('Nome')" />
                 <x-input id="name" type="text" name="name" wire:model.lazy="name" :value="old('name')"
                     class="w-full mx-auto" />
-                {{-- <x-input-error for="name" class="mt-2" /> --}}
+                    @error('name') <span class="error dark:text-white">{{ $message }}</span> @enderror
             </div>
 
             <!-- Preço -->
@@ -39,7 +39,7 @@
                 <x-input-label for="price" :value="__('Preço')" />
                 <x-input id="price" type="text" name="price" wire:model.lazy="price" :value="old('price')"
                     class="w-full mx-auto" />
-                {{-- <x-input-error for="price" class="mt-2" /> --}}
+                @error('price') <span class="error dark:text-white">{{ $message }}</span> @enderror
             </div>
 
             <div class="p-2">
@@ -49,7 +49,7 @@
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
                 </select>
-                {{-- <x-input-error for="price" class="mt-2" /> --}}
+                @error('categories_id') <span class="error dark:text-white">{{ $message }}</span> @enderror
             </div>
 
             <!-- Button -->

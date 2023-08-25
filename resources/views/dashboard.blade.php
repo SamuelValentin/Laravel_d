@@ -35,7 +35,7 @@
                         {{ $product['price'] }}
                     </div>
                     <div class="p-6 text-gray-900 dark:text-gray-100">
-                        {{ $product['categories_id'] }}
+                        {{ $product->categories->name }}
                     </div>
                     <div class="m-5">
                         <a href="/product-edit/{{ $product->id }}/edit">

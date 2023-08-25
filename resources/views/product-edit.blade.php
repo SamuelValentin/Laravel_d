@@ -7,7 +7,7 @@
                 class="max-w-2xl mb-2 text-4xl font-extrabold md:leading-none md:tracking-tight md:text-5xl xl:text-6xl lg:mt-2 dark:text-white">
                 Edição de produto</h1>
         </div>
-        @dd($product)
+
         <livewire:edit-product :product="$product" />
     </section>
     

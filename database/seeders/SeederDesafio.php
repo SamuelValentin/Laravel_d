@@ -18,10 +18,13 @@ class SeederDesafio extends Seeder
     public function run(): void
     {
 
-        User::create([
-            'name' => 'User1',
-            'email' => 'user1@user.com',
-            'password' => Hash::make('senha123'),
+        // User::create([
+        DB::table('users')->insert([
+            [
+                'name' => 'User1',
+                'email' => 'user1@user.com',
+                'password' => Hash::make('senha123'),
+            ],
         ]);
 
         DB::table('categories')->insert([
@@ -52,13 +55,19 @@ class SeederDesafio extends Seeder
             [
                 'name' => 'Produto 3',
                 'price' => 10.0,
-                'user_id' => 2,
+                'user_id' => 1,
                 'categories_id' => 3,
             ],
             [
                 'name' => 'Produto 4',
                 'price' => 20.5,
-                'user_id' => 2,
+                'user_id' => 1,
+                'categories_id' => 2,
+            ],
+            [
+                'name' => 'Produto 5',
+                'price' => 12.5,
+                'user_id' => 1,
                 'categories_id' => 2,
             ],
         ]);
