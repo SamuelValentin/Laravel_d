@@ -2,13 +2,25 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Category;
 use Livewire\Component;
+use App\Models\Category;
 
-class CreateCategory extends Component
+class EditCategory extends Component
 {
+    public $category;
     public $name;
     public $successmessage;
+
+    public function mount( Category $category) {
+        $this->category = $category;
+        $this->name = $category->name;
+    }
+
+    public function removeCategory(int $category_id){
+        Category::where('user_id', auth()->user()->id)->where('id', $category_id)->delete();
+
+        $this->successmessage = 'Categoria removida com sucesso!';
+    }
 
     public function submitForm()
     {
@@ -24,13 +36,11 @@ class CreateCategory extends Component
 
         // Persist contact form submission in database.
 
-        Category::create([
+        $this->category->update([
             'name' => $this->name,
         ]);
 
-        $this->resetInputFields();
-
-        $this->successmessage = 'Categoria cadastrado com sucesso!';
+        $this->successmessage = 'Categoria atualizada com sucesso!';
 
         session()->flash('message', $this->successmessage);
 
@@ -38,11 +48,6 @@ class CreateCategory extends Component
 
     public function render()
     {
-        return view('livewire.create-category');
-    }
-
-    private function resetInputFields()
-    {
-        $this->name = '';
+        return view('livewire.edit-category');
     }
 }

@@ -2,17 +2,26 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Product;
 use Livewire\Component;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 
-class CreateProduct extends Component
+class EditProduct extends Component
 {
+    public $product;
     public $name;
     public $price;
     public $user_id;
     public $categories_id;
     public $successmessage;
+
+    public function mount( Product $product) {
+        $this->product = $product;
+        $this->name = $product->name;
+        $this->price = $product->price;
+        $this->user_id = $product->user_id;
+        $this->categories_id = $product->categories_id;
+    }
 
     public function submitForm()
     {
@@ -31,16 +40,14 @@ class CreateProduct extends Component
 
         // Persist contact form submission in database.
 
-        Product::create([
+        $this->product->update([
             'name' => $this->name,
             'price' => $this->price,
             'user_id' => Auth::user()->id,
             'categories_id' => $this->categories_id
         ]);
 
-        $this->resetInputFields();
-
-        $this->successmessage = 'Produto cadastrado com sucesso!';
+        $this->successmessage = 'Produto atualizado com sucesso!';
 
         session()->flash('message', $this->successmessage);
 
@@ -48,14 +55,7 @@ class CreateProduct extends Component
 
     public function render()
     {
-        return view('livewire.create-product');
+        return view('livewire.edit-product');
     }
 
-    private function resetInputFields()
-    {
-        $this->name = '';
-        $this->price = '';
-        $this->categories_id = '';
-
-    }
 }

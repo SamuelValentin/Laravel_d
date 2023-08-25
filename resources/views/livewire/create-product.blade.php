@@ -28,18 +28,28 @@
 
             <!-- Name -->
             <div class="p-2">
-                <x-label for="name" :value="__('Nome')" />
+                <x-input-label for="name" :value="__('Nome')" />
                 <x-input id="name" type="text" name="name" wire:model.lazy="name" :value="old('name')"
                     class="w-full mx-auto" />
-                <x-input-error for="name" class="mt-2" />
+                {{-- <x-input-error for="name" class="mt-2" /> --}}
             </div>
 
             <!-- Preço -->
             <div class="p-2">
-                <x-label for="price" :value="__('Preço')" />
+                <x-input-label for="price" :value="__('Preço')" />
                 <x-input id="price" type="text" name="price" wire:model.lazy="price" :value="old('price')"
                     class="w-full mx-auto" />
-                <x-input-error for="price" class="mt-2" />
+                {{-- <x-input-error for="price" class="mt-2" /> --}}
+            </div>
+
+            <div class="p-2">
+                <x-input-label for="categories_id" :value="__('categories_id')" />
+                <select wire:model="categories_id">
+                    @foreach (\App\Models\Category::all() as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+                {{-- <x-input-error for="price" class="mt-2" /> --}}
             </div>
 
             <!-- Button -->

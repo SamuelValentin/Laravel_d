@@ -3,7 +3,7 @@
         <div>Cadastre o produto</div>
     </div>
     <div class="max-w-4xl mx-auto w-full justify-start">
-        <form wire:submit.prevent="submitForm" action="/category-form" method="POST">
+        <form wire:submit.prevent="submitForm" action="/create-category" method="POST">
             @csrf
 
             <!-- Success Message -->
